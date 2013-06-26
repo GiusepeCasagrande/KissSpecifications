@@ -57,6 +57,13 @@ namespace KissSpecifications
 		/// <param name="specifications">The specifications to validate.</param>	
 		public static void ThrowIfAnySpecificationIsNotSatisfiedByAny<TTarget>(IEnumerable<TTarget> targets, params ISpecification<TTarget>[] specifications)
 		{
+			if (targets == null)
+			{
+				TTarget nullTarget = default(TTarget);
+				ThrowIfAnySpecificationIsNotSatisfiedBy(nullTarget, specifications);
+			}
+
+
 			foreach (var target in targets)
 			{
 				ThrowIfAnySpecificationIsNotSatisfiedBy(target, specifications);
